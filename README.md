@@ -4,7 +4,7 @@ An out-of-box Python binding for RocksDB using ctypes.
  
 ## Why PyRocks?
 
-There is already a Python binding for RocksDB called [python-rocksdb][1] which wraps C++ API from RocksDB code using Cython. But the problem is we have to build python-rocksdb library before we start coding and sometimes to build process will fail.
+There is already a Python binding for RocksDB called [python-rocksdb][1] which wraps C++ API from RocksDB code using Cython. But the problem is we have to build the library before we start and sometimes the build process will fail and you can do nothing to fix it.
 
 PyRocks leverages the C API which provided by RocksDB which is more mature and stable. And it's pure python code and you can start use it with no extra work.
 
