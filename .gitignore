@@ -1,3 +1,8 @@
+# Vim temp files
+*.swp
+*.swo
+librocksdb.so.*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,5 +1,6 @@
 #coding=utf-8
 
+import six
 import ctypes
 from librocksdb import *
 from Status import Status
@@ -13,12 +14,14 @@ rocksdb_get = librocksdb.rocksdb_get
 
 class DB(object):
     @staticmethod
-    def Open(db_options, name):
+    def Open(db_options, dbname):
         assert isinstance(db_options, DBOptions)
+        assert isinstance(dbname, six.binary_type)
+
         status = Status()
         dbptr = rocksdb_open(
                 db_options.to_rocksdb_internal(), 
-                name,
+                dbname,
                 ctypes.byref(status.to_rocksdb_internal()))
         if dbptr:
             return DB(dbptr), status
@@ -33,8 +36,8 @@ class DB(object):
 
     def Put(self, write_options, key, value):
         assert isinstance(write_options, WriteOptions)
-        assert isinstance(key, str)
-        assert isinstance(value, str)
+        assert isinstance(key, six.binary_type)
+        assert isinstance(value, six.binary_type)
 
         status = Status()
         rocksdb_put(
@@ -47,7 +50,7 @@ class DB(object):
 
     def Get(self, read_options, key):
         assert isinstance(read_options, ReadOptions)
-        assert isinstance(key, str)
+        assert isinstance(key, six.binary_type)
 
         status = Status()
         vallen = ctypes.c_size_t()
