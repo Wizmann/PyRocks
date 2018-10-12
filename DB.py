@@ -9,6 +9,7 @@ from ReadOptions import ReadOptions
 from WriteOptions import WriteOptions
 
 rocksdb_open = librocksdb.rocksdb_open
+rocksdb_close = librocksdb.rocksdb_close
 rocksdb_put = librocksdb.rocksdb_put
 rocksdb_get = librocksdb.rocksdb_get
 
@@ -67,3 +68,7 @@ class DB(object):
             vt = ctypes.c_char * (vallen.value)
             res = ctypes.cast(valptr, ctypes.POINTER(vt))
             return res.contents.value, status
+
+    def Close(self):
+        rocksdb_close(self.dbptr_internal)
+
